@@ -103,10 +103,10 @@ def testf(x,y,z):
     return x*y+x*z+y*z
     
 #np.random.seed(1)
-known = np.random.rand(100000, 3)
+known = np.random.rand(1000, 3)
 data = testf(known[:,0], known[:,1], known[:,2])
 
-unknown = np.random.rand(5000, 3)
+unknown = np.random.rand(500, 3)
 undata = testf(unknown[:,0], unknown[:,1], unknown[:,2])
 
 res_grd = griddata(known, data, unknown)
