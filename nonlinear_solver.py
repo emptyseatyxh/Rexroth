@@ -20,8 +20,8 @@ Created on Wed Oct 19 20:35:48 2016
 #   >>> import nonlineq
 #   >>> nonlineq.secant(lambda x: 2 ** x - 1.5, 0.0, 0.1)
 #
-# Author: Yasunori Yusa
-#
+# Solver Author: Yasunori Yusa
+# Numba optimiz: Xinghao Yang
 
 DEFAULT_TOLERANCE = 1.0E-9
 DEFAULT_MAX_ITER = 100

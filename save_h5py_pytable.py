@@ -70,6 +70,7 @@ gcolumns = h5file.create_group(h5file.root, "column", "save b ")
 h5file.create_array(gcolumns, 'pressure', pressure, "Pressure column selection")
 h5file.create_array(gcolumns, 'name', names, "Name column selection")
 
+read_out_dt = h5file.root.column.pressure.read()
 print(h5file)
 h5file.close()
 
