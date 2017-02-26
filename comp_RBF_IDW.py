@@ -19,6 +19,11 @@ import numpy as np
 import numexpr as ne
 
 
+def testf(x,y,z):
+    return x + y**2 - 0.77*z
+    
+np.random.seed(1)
+
 def IDW(known, data, unknown):
     mytree = spatial.cKDTree(known)
     dist, indexes = mytree.query(unknown, 8)
@@ -26,7 +31,7 @@ def IDW(known, data, unknown):
     denomiator = np.zeros(unknown.shape[0])
     nominator = np.zeros(unknown.shape[0])
     for i in range(8):
-        ele = np.prod(np.hstack((dist[:,:i],dist[:,i+1:])), axis=1)
+        ele = np.prod(np.hstack((dist[:,:i],dist[:,i+1:])), axis=1) ** 2
         denomiator += ele
         nominator += ele*nearest[:,i]
     res = nominator/denomiator
@@ -177,22 +182,18 @@ def local_RBF_ne(known, data, unknown, local_n, fchoice):
     return res
     
     
-def testf(x,y,z):
-    return x*y+x*z+y*z
-    
-#np.random.seed(1)
-known = np.random.rand(50000, 3)
+known = np.random.rand(5000, 3)
 data = testf(known[:,0], known[:,1], known[:,2])
 
-unknown = np.random.rand(10000, 3)
+unknown = np.random.rand(2000, 3)
 undata = testf(unknown[:,0], unknown[:,1], unknown[:,2])
 
 res_grd = griddata(known, data, unknown)
 res_IDW = IDW(known, data, unknown)
 t1 = time.time()
-res_lRBF = local_RBF(known, data, unknown, 50, 1)
+res_lRBF = local_RBF(known, data, unknown, 8, 1)
 t2 = time.time()
-res_lRBF_ne = local_RBF_ne(known, data, unknown, 50, 1)
+res_lRBF_ne = local_RBF_ne(known, data, unknown, 8, 2)
 t3 = time.time()
 t_alt = t2-t1
 t_new = t3-t2
