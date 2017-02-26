@@ -110,7 +110,11 @@ for i in range(len(a)):
                                            kk[i], 2e-12, 2e-12, 90)
 t3 = time.time()
 res2, iii2 = Ccb.main(a, kk)
-t4 =time.time()
+t4 = time.time()
+_, _ = Ccb.main2(a, kk)
+t5 = time.time()
+_, _ = Ccb.main3(a, kk)
+t6 = time.time()
 
 t_0 = t2-t1
 t_1 = t3-t2
@@ -122,6 +126,8 @@ average_i1 = np.mean(iii1)
 average_i2 = np.mean(iii2)
 print(t_0)
 print(t_1)
+print(t5-t4)
+print(t6-t5)
 print('err: %s, i: %s'%(error_1, average_i1))
 print(t_2)
 print('err: %s, i: %s'%(error_2, average_i2))

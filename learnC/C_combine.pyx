@@ -76,3 +76,25 @@ def main(np.ndarray[DTYPE_t, ndim=1] a, np.ndarray[DTYPE_t, ndim=1] kk):
         c, c2 = python_bisect(0., 2., a[i], kk[i], 10)
         res[i], iii[i] = secant(c, c2, a[i], kk[i])
     return res, iii
+    
+def main2(double [:] a, double [:] kk):
+    cdef int l_arr = a.shape[0]
+    cdef int i
+    cdef double c, c2
+    cdef np.ndarray[DTYPE_t, ndim=1] res = np.zeros(l_arr, dtype=DTYPE)
+    cdef np.ndarray[TTYPE_t, ndim=1] iii = np.zeros(l_arr, dtype=TTYPE)
+    for i in range(l_arr):
+        c, c2 = python_bisect(0., 2., a[i], kk[i], 10)
+        res[i], iii[i] = secant(c, c2, a[i], kk[i])
+    return res, iii
+    
+def main3(double [:] a, double [:] kk):
+    cdef int l_arr = a.shape[0]
+    cdef int i
+    cdef double c, c2
+    cdef np.ndarray[DTYPE_t, ndim=1] res = np.zeros(l_arr, dtype=DTYPE)
+    cdef np.ndarray[TTYPE_t, ndim=1] iii = np.zeros(l_arr, dtype=TTYPE)
+    for i from 0 <= i < l_arr:
+        c, c2 = python_bisect(0., 2., a[i], kk[i], 10)
+        res[i], iii[i] = secant(c, c2, a[i], kk[i])
+    return res, iii
